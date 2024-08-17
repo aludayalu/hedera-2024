@@ -1,0 +1,1 @@
+[{"stateMutability": "nonpayable", "type": "function", "name": "hello", "inputs": [], "outputs": [{"name": "", "type": "int64"}]}, {"stateMutability": "view", "type": "function", "name": "greet", "inputs": [], "outputs": [{"name": "", "type": "string"}]}, {"stateMutability": "nonpayable", "type": "constructor", "inputs": [], "outputs": []}]

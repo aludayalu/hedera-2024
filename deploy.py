@@ -9,7 +9,7 @@ web3 = Web3(Web3.HTTPProvider("https://testnet.hashio.io/api"))
 
 account = web3.eth.account.from_key(private_key)
 
-process=subprocess.run(["vyper", "hello.vy"], stdout=subprocess.PIPE)
+process=subprocess.run(["vyper", "contracts/main.vy"], stdout=subprocess.PIPE)
 data=process.stdout.decode().strip(" \n\r")
 
 tx = {
@@ -25,4 +25,6 @@ tx["gas"] = gas_estimate
 signed_tx = web3.eth.account.sign_transaction(tx, account.key)
 tx_hash = web3.eth.send_raw_transaction(signed_tx.rawTransaction)
 receipt = web3.eth.wait_for_transaction_receipt(tx_hash)
+os.system("vyper -f abi contracts/main.vy > abi/abi.json")
+open("contract_hash", "w").write(receipt["to"])
 print(receipt)
