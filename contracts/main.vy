@@ -1,11 +1,16 @@
-# @version ^0.4.0
-
-greet: public(String[100])  
+# @version ^0.4.0 
 
 @deploy
 def __init__():
-    self.greet="Hello World"
+    return
+
+struct Work:
+    type: bool
+    script: String[64]
+    node_count: int8
+    nodes: int64[5]
+    incentive: uint256
 
 @external
-def hello()->int64:
-    return 1024
+def assign_work(type:bool, script: String[64], nodes: int8, incentive: uint256):
+    return
