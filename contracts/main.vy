@@ -11,7 +11,7 @@ work_ids: uint256[1000]
 
 struct Work:
     initiator: address
-    type: bool
+    type: uint8
     script: String[64]
     node_count: uint256
     nodes: address[5]
@@ -24,10 +24,10 @@ struct Work:
 
 @external
 @payable
-def assign_work(type:bool, script: String[64], nodes: uint256, incentive: uint256, id: uint256):
+def assign_work(type:uint8, script: String[64], nodes: uint256, incentive: uint256, id: uint256):
     assert id!=0, "id cannot be 0"
     assert self.works[id].node_count==0, "work id already exists"
-    assert not (nodes>=1 and nodes<=5), "invalid node count specified"
+    assert (nodes>=1 and nodes<=5), "invalid node count specified"
     self.works[id].initiator=msg.sender
     self.works[id].type=type
     self.works[id].script=script
