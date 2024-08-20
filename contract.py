@@ -18,22 +18,12 @@ def get_contract_address():
 def call_func(name, args=[]):
     contract_address=get_contract_address()
     contract = w3.eth.contract(address=contract_address, abi=abi)
-    statement=f"call_function = contract.functions.{name}({','.join([json.dumps(x) for x in args])}).build_transaction("+"""
+    call_function = getattr(contract.functions, name)(*args).build_transaction(
         {
             'from': account.address,
             'nonce': w3.eth.get_transaction_count(account.address),
         }
     )
-"""
-    new_locals,new_globals={}|globals()|locals(),{}|globals()|locals()
-    while True:
-        try:
-            exec(statement,new_globals,new_locals)
-            break
-        except requests.exceptions.HTTPError:
-            time.sleep(1)
-            continue
-    call_function=new_locals["call_function"]
     tx_create = w3.eth.account.sign_transaction(call_function, private_key)
     while True:
         try:
@@ -64,14 +54,5 @@ def call_func(name, args=[]):
 def local_call(name, args=[]):
     contract_address=get_contract_address()
     contract = w3.eth.contract(address=contract_address, abi=abi)
-    statement=f"call_function = contract.functions.{name}({','.join([json.dumps(x) for x in args])}).call()"
-    new_locals,new_globals={}|globals()|locals(),{}|globals()|locals()
-    while True:
-        try:
-            exec(statement,new_globals,new_locals)
-            break
-        except requests.exceptions.HTTPError:
-            time.sleep(1)
-            continue
-    call_function=new_locals["call_function"]
+    call_function = getattr(contract.functions, name)(*args).call({"from":account.address})
     return call_function

@@ -8,6 +8,7 @@ works: HashMap[uint256, Work]
 empty_buffer: constant(bytes32) = 0x0000000000000000000000000000000000000000000000000000000000000000
 empty_address: constant(address) = 0x0000000000000000000000000000000000000000
 work_ids: uint256[1000]
+default_Work: Work
 
 struct Work:
     initiator: address
@@ -54,6 +55,16 @@ def submit_commitment(work_id: uint256, commitment: bytes32):
     assert index!=-1, "you are not a part of the work"
     self.works[work_id].commitments[index]=commitment
 
+@external
+def get_work_index_from_work_id(work_id: uint256)->(address, address):
+    index: uint256=5
+    loops: uint256=0
+    for i: uint256 in range(20):
+        if i<self.works[work_id].node_count:
+            loops+=1
+            return self.works[work_id].nodes[i], msg.sender
+    return empty_address, empty_address
+
 @internal
 def check_all_commitments(work_id: uint256):
     index: int256=-1
@@ -62,6 +73,7 @@ def check_all_commitments(work_id: uint256):
             index = convert(i, int256)
             break
     self.work_ids[index]=0
+    self.works[work_id]=self.default_Work
     frequencies: int256[5] = [0, 0, 0, 0, 0]
     max_frequency: int256 = 0
     most_frequent_work: bytes32 = empty_buffer
