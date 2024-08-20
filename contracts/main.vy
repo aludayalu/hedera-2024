@@ -94,11 +94,12 @@ def check_all_commitments(work_id: uint256):
                 matching_addresses[matching_count] = self.works[work_id].nodes[i]
                 matching_count += 1
     num_matching: uint256 = convert(matching_count, uint256)
-    incentive_per_address: uint256 = ((self.works[work_id].total_incentive // num_matching) * 9) // 10
-    for i: uint256 in range(5):
-        if matching_addresses[i] != empty_address:
-            # send(matching_addresses[i], incentive_per_address) // will be added on the mainnet
-            pass
+    # will be added on the mainnet
+    # incentive_per_address: uint256 = ((self.works[work_id].total_incentive // num_matching) * 9) // 10
+    # for i: uint256 in range(5):
+    #     if matching_addresses[i] != empty_address:
+    #         # send(matching_addresses[i], incentive_per_address)
+    #         pass
 
 @external
 def join_work(work_id: uint256):
@@ -117,7 +118,6 @@ def submit_commitment_proof(work_id: uint256, random: bytes32, work: bytes32):
                 index = convert(i, int256)
                 break
     assert index!=-1, "you are not a part of the work"
-    assert self.works[work_id].randoms[index]==empty_buffer, "you can't submit a commitment proof again"
     assert self.works[work_id].commitments[index]==sha256(concat(random, work)), "incorrect commitment"
     self.works[work_id].randoms[index]=random
     self.works[work_id].works[index]=work
