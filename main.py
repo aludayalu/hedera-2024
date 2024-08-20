@@ -9,8 +9,19 @@ tailwindcss="<script>"+open("public/tailwind.js").read()+"</script>"
 @app.get("/")
 def home():
     signals=open("public/signals.js").read()
-    print(tokeniser(open("components/index.html").read()))
-    print(parser(tokeniser(open("components/index.html").read())))
+    maincss=open("public/main.css").read()
     return render("index", locals()|globals())
+
+@app.get("/pricing")
+def pricing():
+    signals=open("public/signals.js").read()
+    maincss=open("public/main.css").read()
+    return render("pricing", locals()|globals())
+
+@app.get("/dashboard")
+def dashboard():
+    signals=open("public/signals.js").read()
+    maincss=open("public/main.css").read()
+    return render("dashboard", locals()|globals())
 
 app.run(host="0.0.0.0", port=int(sys.argv[1]))

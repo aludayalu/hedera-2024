@@ -1,0 +1,68 @@
+<html lang="en">
+
+    <head>
+        {tailwindcss}
+        <meta charset="UTF-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+
+        <title>Rigged - Dashboard</title>
+        <meta name="description" content="The future of distributed computing and artificial intelligence powered by Zero-Knowledge proofs on hedera."></meta>
+        <meta property="og:locale" content="en_US"></meta>
+        <meta property="og:type" content="website"></meta>
+        <meta property="og:title" content="Rigged"></meta>
+        <meta property="og:description" content="The future of distributed computing and artificial intelligence powered by Zero-Knowledge proofs on hedera."></meta>
+        <meta property="og:site_name" content="rigged"></meta>
+
+        <style>{maincss}</style>
+    </head>
+
+    <body class="min-h-screen max-w-screen bg-black font-inter text-white antialiased inter relative overflow-x-hidden">
+
+        <div class="flex flex-row items-center justify-center sticky top-0 z-[100] h-[72px] border-b border-[#18181b] backdrop-blur-xl">
+            <div class="relative flex max-w-[100vw] flex-row items-center justify-between w-[1200px] mx-14">
+                <a href="/" class="omega italic text-5xl">Rigged</a>
+                <div class="flex gap-7">
+                    <a href="/" class="w-max flex justify-center items-center rounded-md transition hover:text-white/80 text-sm font-normal">How it Works</a>
+                    <a href="/pricing" class="w-max flex justify-center items-center rounded-md transition hover:text-white/80 text-sm font-normal">Pricing</a>
+                    <a href="/dashboard" class="w-max flex justify-center items-center rounded-md transition hover:text-white/80 text-sm font-normal">Dashboard</a>
+                </div>    
+            </div>
+        </div>
+
+        <div class="h-[calc(100vh-72px)] flex flex-col px-10 pt-5">
+            <div class="flex-1 flex flex-col gap-5">
+                <div class="flex gap-2">
+                    <div class="w-8 h-8 flex justify-center items-center bg-white/10 border border-white/10 px-1.5 py-1.5 rounded-full text-yellow-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path><path d="M20 3v4"></path><path d="M22 5h-4"></path><path d="M4 17v2"></path><path d="M5 18H3"></path></svg>
+                    </div>
+                    <div class="w-[45%] bg-white/10 border border-white/10 px-3 py-2 rounded-lg flex flex-col gap-2">
+                        <p class="text-white/50 text-sm">Your AI</p>
+                        <p class="text-white/80 text-sm">brfbhj ewebhyunw</p>
+                    </div>
+                </div>
+                <div class="w-[45%] bg-white/10 border border-white/10 px-3 py-2 rounded-lg self-end">
+                    <p class="text-white/80 text-sm">brfbhj ewebhyunw</p>
+                </div>
+                <div class="flex gap-2">
+                    <div class="w-8 h-8 flex justify-center items-center bg-white/10 border border-white/10 px-1.5 py-1.5 rounded-full text-yellow-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path><path d="M20 3v4"></path><path d="M22 5h-4"></path><path d="M4 17v2"></path><path d="M5 18H3"></path></svg>
+                    </div>
+                    <div class="w-[45%] bg-white/10 border border-white/10 px-3 py-2 rounded-lg flex flex-col gap-2">
+                        <p class="text-white/50 text-sm">Your AI</p>
+                        <p class="text-white/80 text-sm">brfbhj ewebhyunw</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full flex gap-2.5 pb-5">
+                <input type="text" placeholder="Ask a question to Your AI" class="outline-1 outline outline-white/20 focus:outline-white/30 bg-white/10 text-white rounded-lg w-full px-3 py-2 placeholder:text-white/30 transition"></input>
+
+                <button class="px-3 py-3 rounded-lg bg-white/10 font-semibold text-white/60 outline-1 outline outline-white/20 w-max flex relative hover:bg-white/[0.15] transition-all backdrop-blur-[1px]">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 3 3 9-3 9 19-9Z" ></path><path d="M6 12h16"></path></svg>
+                </button>
+            </div>
+        </div>
+
+    </body>
+
+</html>
