@@ -25,6 +25,7 @@ struct Work:
 @external
 @payable
 def assign_work(type:uint8, script: String[64], nodes: uint256, incentive: uint256, id: uint256):
+    # assert msg.value>=incentive, "you sent money less than the incentive" // will be added on the mainnet
     assert id!=0, "id cannot be 0"
     assert self.works[id].node_count==0, "work id already exists"
     assert (nodes>=1 and nodes<=5), "invalid node count specified"
@@ -81,10 +82,11 @@ def check_all_commitments(work_id: uint256):
                 matching_addresses[matching_count] = self.works[work_id].nodes[i]
                 matching_count += 1
     num_matching: uint256 = convert(matching_count, uint256)
-    incentive_per_address: uint256 = (self.works[work_id].total_incentive // num_matching) * 10
+    incentive_per_address: uint256 = ((self.works[work_id].total_incentive // num_matching) * 9) // 10
     for i: uint256 in range(5):
         if matching_addresses[i] != empty_address:
-            send(matching_addresses[i], incentive_per_address)
+            # send(matching_addresses[i], incentive_per_address) // will be added on the mainnet
+            pass
 
 @external
 def join_work(work_id: uint256):
