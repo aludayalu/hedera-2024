@@ -73,6 +73,7 @@ def check_all_commitments(work_id: uint256):
 
 @external
 def join_work(work_id: uint256):
+    assert self.works[work_id].node_count!=0, "work does not exist"
     assert self.works[work_id].joined<=self.works[work_id].node_count, "enough nodes have already joined"
     self.works[work_id].nodes[self.works[work_id].joined]=msg.sender
     self.works[work_id].joined+=1
