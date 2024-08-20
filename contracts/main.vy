@@ -7,6 +7,7 @@ def __init__():
 works: HashMap[uint256, Work]
 empty_buffer: constant(bytes32) = 0x0000000000000000000000000000000000000000000000000000000000000000
 empty_address: constant(address) = 0x0000000000000000000000000000000000000000
+work_ids: uint256[1000]
 
 struct Work:
     initiator: address
@@ -24,6 +25,7 @@ struct Work:
 @external
 @payable
 def assign_work(type:bool, script: String[64], nodes: uint256, incentive: uint256, id: uint256):
+    assert id!=0, "id cannot be 0"
     assert self.works[id].node_count==0, "work id already exists"
     assert not (nodes>=1 and nodes<=5), "invalid node count specified"
     self.works[id].initiator=msg.sender
@@ -31,6 +33,13 @@ def assign_work(type:bool, script: String[64], nodes: uint256, incentive: uint25
     self.works[id].script=script
     self.works[id].node_count=nodes
     self.works[id].total_incentive=incentive
+    index: int256=-1
+    for i: uint256 in range(1000):
+        if self.work_ids[i]==0:
+            index = convert(i, int256)
+            break
+    assert index!=-1, "too many works already assigned"
+    self.work_ids[index]=id
 
 @external
 def submit_commitment(work_id: uint256, commitment: bytes32):
@@ -46,6 +55,12 @@ def submit_commitment(work_id: uint256, commitment: bytes32):
 
 @internal
 def check_all_commitments(work_id: uint256):
+    index: int256=-1
+    for i: uint256 in range(1000):
+        if self.work_ids[i]==0:
+            index = convert(i, int256)
+            break
+    self.work_ids[index]=0
     frequencies: int256[5] = [0, 0, 0, 0, 0]
     max_frequency: int256 = 0
     most_frequent_work: bytes32 = empty_buffer
@@ -95,3 +110,11 @@ def submit_commitment_proof(work_id: uint256, random: bytes32, work: bytes32):
     self.works[work_id].submitted+=1
     if self.works[work_id].submitted==self.works[work_id].node_count:
         self.check_all_commitments(work_id)
+
+@external
+def all_work_ids()->uint256[1000]:
+    return self.work_ids
+
+@external
+def get_work(id: uint256)->Work:
+    return self.works[id]
