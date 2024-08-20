@@ -19,6 +19,7 @@ struct Work:
     randoms: bytes32[5]
     works: bytes32[5]
     submitted: uint256
+    joined: uint256
 
 @external
 @payable
@@ -69,6 +70,12 @@ def check_all_commitments(work_id: uint256):
     for i: uint256 in range(5):
         if matching_addresses[i] != empty_address:
             send(matching_addresses[i], incentive_per_address)
+
+@external
+def join_work(work_id: uint256):
+    assert self.works[work_id].joined<=self.works[work_id].node_count, "enough nodes have already joined"
+    self.works[work_id].nodes[self.works[work_id].joined]=msg.sender
+    self.works[work_id].joined+=1
 
 @external
 def submit_commitment_proof(work_id: uint256, random: bytes32, work: bytes32):
